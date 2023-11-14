@@ -1,8 +1,3 @@
-# SeekTruth.py : Classify text objects into two categories
-#
-# isbens-dimehta-yahrkapa
-#
-
 import sys
 import re 
 import numpy as np
