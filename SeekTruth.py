@@ -70,19 +70,6 @@ def word_frequencies(bag_of_words, reviews, labels):
 
     return (truthful_freq_dict, deceptive_freq_dict, word_freq_dict)
 
-# classifier : Train and apply a bayes net classifier
-#
-# This function should take a train_data dictionary that has three entries:
-#        train_data["objects"] is a list of strings corresponding to reviews
-#        train_data["labels"] is a list of strings corresponding to ground truth labels for each review
-#        train_data["classes"] is the list of possible class names (always two)
-#
-# and a test_data dictionary that has objects and classes entries in the same format as above. It
-# should return a list of the same length as test_data["objects"], where the i-th element of the result
-# list is the estimated classlabel for test_data["objects"][i]
-#
-# Do not change the return type or parameters of this function!
-#
 def classifier(train_data, test_data):
 
     train_reviews, train_labels, test_reviews = preprocess(train_data["objects"]), train_data["labels"], preprocess(test_data["objects"])
@@ -149,14 +136,12 @@ if __name__ == "__main__":
         raise Exception("Usage: classify.py train_file.txt test_file.txt")
 
     (_, train_file, test_file) = sys.argv
-    # Load in the training and test datasets. The file format is simple: one object
-    # per line, the first word one the line is the label.
+
     train_data = load_file(train_file)
     test_data = load_file(test_file)
     if(sorted(train_data["classes"]) != sorted(test_data["classes"]) or len(test_data["classes"]) != 2):
         raise Exception("Number of classes should be 2, and must be the same in test and training data")
 
-    # make a copy of the test data without the correct labels, so the classifier can't cheat!
     test_data_sanitized = {"objects": test_data["objects"], "classes": test_data["classes"]}
 
     results = classifier(train_data, test_data_sanitized)
